@@ -10,8 +10,8 @@ import org.scalatra._
 class ScalatraBootstrap extends LifeCycle with SystemSettingsService {
   override def init(context: ServletContext): Unit = {
 
-    val settings =    loadSystemSettings(  )
-    if (settings.baseUrl.exists(_.startsWith("https://"  ))) {
+    val settings = loadSystemSettings()
+    if (settings.baseUrl.exists(_.startsWith("https://"))) {
       context.getSessionCookieConfig.setSecure(true)
     }
 
@@ -30,7 +30,7 @@ class ScalatraBootstrap extends LifeCycle with SystemSettingsService {
       .addMappingForUrlPatterns(EnumSet.allOf(classOf[DispatcherType]), true, "/api/*")
 
     // Register controllers
-    context.mount(new PreProcessController,       "/*")
+    context.mount(new PreProcessController, "/*")
 
     context.addFilter("pluginControllerFilter", new PluginControllerFilter)
     context
@@ -48,7 +48,7 @@ class ScalatraBootstrap extends LifeCycle with SystemSettingsService {
     filter.mount(new RepositoryViewerController, "/*")
     filter.mount(new WikiController, "/*")
     filter.mount(new LabelsController, "/*")
-    filter.mount(new PrioritiesController, "/*"   )
+    filter.mount(new PrioritiesController, "/*")
     filter.mount(new MilestonesController, "/*")
     filter.mount(new IssuesController, "/*")
     filter.mount(new PullRequestsController, "/*")
