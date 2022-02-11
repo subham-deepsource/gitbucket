@@ -3,7 +3,7 @@ import javax.servlet._
 
 import gitbucket.core.controller.{ReleaseController, _}
 import gitbucket.core.service.SystemSettingsService
-   import gitbucket.core.servlet._
+import gitbucket.core.servlet._
 import gitbucket.core.util.Directory
 import org.scalatra._
 
@@ -39,14 +39,14 @@ class ScalatraBootstrap extends LifeCycle with SystemSettingsService {
 
     context.mount(new FileUploadController, "/upload")
 
-    val filter   = new CompositeScalatraFilter()
+    val filter = new CompositeScalatraFilter()
     filter.mount(new IndexController, "/")
-      filter.mount(new ApiController, "/api/v3")
+    filter.mount(new ApiController, "/api/v3")
     filter.mount(new SystemSettingsController, "/admin")
     filter.mount(new DashboardController, "/*")
     filter.mount(new AccountController, "/*")
     filter.mount(new RepositoryViewerController, "/*")
-       filter.mount(new WikiController, "/*")
+    filter.mount(new WikiController, "/*")
     filter.mount(new LabelsController, "/*")
     filter.mount(new PrioritiesController, "/*")
     filter.mount(new MilestonesController, "/*")
